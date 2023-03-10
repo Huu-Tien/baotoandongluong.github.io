@@ -98,6 +98,8 @@ $(document).ready(function(){
   });
 
   $("#run").click(function(){
+    $('input[name=radio_va_cham]').prop('disabled', true);
+
     var valRadio = $('input[name=radio_va_cham]:checked').val();
     valRadio = Number(valRadio);
     if (valRadio == 1) {
@@ -106,17 +108,32 @@ $(document).ready(function(){
       vaChamDanHoi();
     }
 
-    
+    setTimeout(function() {
+      $('input[name=radio_va_cham]').prop('disabled', false);
+    }, 2000);
   });
 
   $("#reset").click(function(){
-    $("#xe1").animate({
-      left: '1%'
-    })
+    var valRadio = $('input[name=radio_va_cham]:checked').val();
+    valRadio = Number(valRadio);
 
-    $("#xe2").animate({
-      left: '81%'
-    })
+    if (valRadio == 1) {
+      $("#xe1").animate({
+            left: '3%'
+        })
+
+      $("#xe2").animate({
+            left: '50%'
+          })
+    } else if (valRadio == 2) {
+      $("#xe1").animate({
+          left: '3%'
+        })
+
+        $("#xe2").animate({
+          left: '81%'
+        })
+    }
 
     // enabled button run
     $("#run").prop('disabled', false);
@@ -125,11 +142,11 @@ $(document).ready(function(){
 
 function vaChamMem() {
   $("#xe1").animate({
-        left: '40%'
-    }, 1000);
-    $("#xe2").animate({
+        left: '45%'
+    }, 1030);
+/*    $("#xe2").animate({
       left: '53%'
-    }, 1000);
+    }, 1000);*/
     $("#reset").prop('disabled', true);
 
     // sau va chạm
@@ -153,7 +170,7 @@ function vaChamMem() {
 
 function vaChamDanHoi() {
   $("#xe1").animate({
-        left: '40%'
+        left: '41%'
     }, 800);
     $("#xe2").animate({
       left: '53%'
@@ -178,6 +195,30 @@ function vaChamDanHoi() {
       $("#reset").prop('disabled', false);
     }, 2000);
 }
+
+function handleChange(src) {
+  var val = Number(src.value);
+
+  if (val == 1) {
+      $("#xe1").animate({
+            left: '3%'
+        })
+
+      $("#xe2").animate({
+            left: '50%'
+          })
+  } else if (val == 2) {
+      $("#xe1").animate({
+          left: '3%'
+        })
+
+        $("#xe2").animate({
+          left: '81%'
+        })
+  }
+
+  $("#run").prop('disabled', false);
+}
 </script>
 	<title>Vật Lý Thầy Tiến</title>
 </head>
@@ -186,13 +227,13 @@ function vaChamDanHoi() {
   <div class="row">
     <div class="d-flex">
     <div class="form-check">
-    <input class="form-check-input" type="radio" value="1" id="flexCheckIndeterminate" checked="checked" name="radio_va_cham">
+    <input class="form-check-input" type="radio" value="1" id="flexCheckIndeterminate" checked="checked" name="radio_va_cham" onchange="handleChange(this);">
     <label class="form-check-label" for="flexCheckIndeterminate">
       Va chạm mềm
     </label>
   </div>
   <div class="form-check" style="margin-left: 10px">
-  <input class="form-check-input" type="radio" value="2" id="flexCheckIndeterminate" name="radio_va_cham">
+  <input class="form-check-input" type="radio" value="2" id="flexCheckIndeterminate" name="radio_va_cham" onchange="handleChange(this);">
   <label class="form-check-label" for="flexCheckIndeterminate">
     Va chạm đàn hồi
   </label>
@@ -208,11 +249,11 @@ function vaChamDanHoi() {
 
   <div class="row position-relative mt-2">
     <img style="width: 100%" src="thanh_diem_1.png">
-    <div class="position-absolute" style="width: 15%" id="xe1">
+    <div class="position-absolute" style="width: 15%; left: 3%" id="xe1">
           <img src="xe1.png">
     </div>
-    <div class="position-absolute" style="width: 15%; right: 4%; top: 22%" id="xe2">
-          <img src="xe2_1.png">
+    <div class="position-absolute" style="width: 15%; right: 4%; top: 22%; left: 50%;" id="xe2">
+          <img src="xe2.png">
     </div>
   </div>
   <div class="row mt-4">
